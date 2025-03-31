@@ -1,0 +1,15 @@
+{
+  "id":4,
+  "FullName":"Full Name"
+}
+
+if success returns
+
+{
+  "status": 0,
+  "message": "Success",
+  "user": {
+    "id": null,
+    "fullName": null
+  }
+}
