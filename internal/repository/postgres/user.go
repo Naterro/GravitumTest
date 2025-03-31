@@ -54,3 +54,22 @@ func UpdateUser(id int, user model.User) error {
 	}
 
 }
+func DeleteUser(id int) error {
+	query := fmt.Sprintf(`DELETE FROM users WHERE id = %d`, id)
+	result, err := DB.Exec(query)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return err
+	}
+	if rowsAffected == 0 {
+		log.Printf("User with id - %d Not found", id)
+		return errors.New("User not found")
+	} else {
+		return nil
+	}
+
+}

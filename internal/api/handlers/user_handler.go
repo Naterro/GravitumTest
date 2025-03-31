@@ -94,3 +94,22 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Write(respB)
 }
+func DeleteUser(w http.ResponseWriter, r *http.Request) {
+	id, err := strconv.Atoi(mux.Vars(r)["id"])
+
+	err = postgres.DeleteUser(id)
+	resp := model.Response{}
+	if err != nil {
+		resp.Status = -1
+		resp.Message = err.Error()
+	} else {
+		resp.Status = 0
+		resp.Message = "Success"
+	}
+
+	respB, err := json.Marshal(resp)
+	if err != nil {
+		fmt.Println(err)
+	}
+	w.Write(respB)
+}
